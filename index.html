@@ -207,23 +207,20 @@
                 `;
 
                 productCard.querySelector('.contact-product-btn').addEventListener('click', (e) => {
-                    const productId = e.target.dataset.productId;
-                    const selectedProduct = products.find(p => p.id == productId);
-                    renderContactFormPage(selectedProduct);
+                    renderContactFormPage();
                 });
 
                 productListContainer.appendChild(productCard);
             });
         }
 
-        function renderContactFormPage(product) {
+        function renderContactFormPage() {
             mainContent.innerHTML = `
                 <div class="bg-white p-6 md:p-8 rounded-xl shadow-md max-w-2xl mx-auto">
                     <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">İletişim Formu</h2>
-                    <p class="text-center text-gray-600 mb-6"><strong>${product.name}</strong> ürünü hakkında bilgi almak için formu doldurun. Size en kısa sürede dönüş yapacağız.</p>
+                    <p class="text-center text-gray-600 mb-6">İlgilendiğiniz ürünler hakkında bilgi almak için formu doldurun. Size en kısa sürede dönüş yapacağız.</p>
                     
                     <form id="contact-form" class="space-y-4">
-                        <input type="hidden" name="Ürün Adı" value="${product.name}">
                         <div>
                             <label for="full-name" class="block text-gray-700 font-medium mb-1">Ad Soyad</label>
                             <input type="text" id="full-name" name="Ad Soyad" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e95f0b]" required>
@@ -235,6 +232,17 @@
                         <div>
                             <label for="phone" class="block text-gray-700 font-medium mb-1">Telefon Numarası</label>
                             <input type="tel" id="phone" name="Telefon Numarası" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e95f0b]" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-1">İlgilenilen Ürünler</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                ${products.map(product => `
+                                    <label class="flex items-center space-x-2 bg-gray-100 p-3 rounded-lg cursor-pointer hover:bg-gray-200 transition duration-150">
+                                        <input type="checkbox" name="İlgilenilen Ürünler" value="${product.name}" class="form-checkbox text-[#e95f0b] rounded-sm focus:ring-[#e95f0b]">
+                                        <span>${product.name}</span>
+                                    </label>
+                                `).join('')}
+                            </div>
                         </div>
                         <button type="submit" class="w-full bg-[#e95f0b] text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-[#017fc0] transition duration-300 transform hover:scale-105">
                             İletişime Geçin
@@ -254,9 +262,23 @@
                 const formData = new FormData(form);
 
                 const data = {};
+                const selectedProducts = [];
                 formData.forEach((value, key) => {
-                    data[key] = value;
+                    if (key === 'İlgilenilen Ürünler') {
+                        selectedProducts.push(value);
+                    } else {
+                        data[key] = value;
+                    }
                 });
+
+                if (selectedProducts.length > 0) {
+                    data['İlgilenilen Ürünler'] = selectedProducts.join(', ');
+                } else {
+                     showNotification("Lütfen en az bir ürün seçin.", true);
+                     contactBtn.disabled = false;
+                     contactBtn.textContent = 'İletişime Geçin';
+                     return;
+                }
                 
                 const formsubmitUrl = 'https://formsubmit.co/agurbuz2011@gmail.com'; 
 

@@ -44,13 +44,13 @@
                         <a href="#" id="home-nav-link" class="inline-block px-4 py-2 rounded-full font-semibold bg-[#e95f0b] text-white backdrop-blur-lg transition duration-300">Anasayfa</a>
                     </li>
                     <li>
-                        <a href="#" class="inline-block px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white hover:backdrop-blur-lg transition duration-300">Ürünler</a>
+                        <a href="#" id="products-nav-link" class="inline-block px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white hover:backdrop-blur-lg transition duration-300">Ürünler</a>
                     </li>
                     <li>
                         <a href="#" class="inline-block px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white hover:backdrop-blur-lg transition duration-300">Hakkımızda</a>
                     </li>
                     <li>
-                        <a href="#" class="inline-block px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white hover:backdrop-blur-lg transition duration-300">İletişim</a>
+                        <a href="#" id="contact-nav-link" class="inline-block px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white hover:backdrop-blur-lg transition duration-300">İletişim</a>
                     </li>
                 </ul>
             </nav>
@@ -71,13 +71,13 @@
                 <a href="#" id="home-sidebar-link" class="inline-block w-full px-4 py-2 rounded-full font-semibold bg-[#e95f0b] text-white transition duration-300">Anasayfa</a>
             </li>
             <li>
-                <a href="#" class="inline-block w-full px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white transition duration-300">Ürünler</a>
+                <a href="#" id="products-sidebar-link" class="inline-block w-full px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white transition duration-300">Ürünler</a>
             </li>
             <li>
                 <a href="#" class="inline-block w-full px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white transition duration-300">Hakkımızda</a>
             </li>
             <li>
-                <a href="#" class="inline-block w-full px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white transition duration-300">İletişim</a>
+                <a href="#" id="contact-sidebar-link" class="inline-block w-full px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white transition duration-300">İletişim</a>
             </li>
         </ul>
     </div>
@@ -104,26 +104,38 @@
             {
                 id: 1,
                 name: "Özel Masaüstü Heykel",
-                description: "Benzersiz tasarımlara sahip, kişiselleştirilebilir dekoratif heykel.",
+                description: "Benzersiz tasarımlara sahip, kişiselleştirilebilir dekoratif heykel. Ofisinizde veya evinizde modern bir dokunuş yaratın.",
                 image_url: "https://placehold.co/400x300/e0e0e0/555555?text=3D+Baskı+1"
             },
             {
                 id: 2,
                 name: "Modern Saksılık",
-                description: "Ev ve ofisler için minimalist tasarımlı, şık saksılık.",
+                description: "Ev ve ofisler için minimalist tasarımlı, şık saksılık. Bitkilerinizi sergilemenin en modern yolu.",
                 image_url: "https://placehold.co/400x300/d0d0d0/555555?text=3D+Baskı+2"
             },
             {
                 id: 3,
                 name: "Çok Amaçlı Düzenleyici",
-                description: "Masanızı düzenlemek için fonksiyonel ve renkli bir çözüm.",
+                description: "Masanızı düzenlemek için fonksiyonel ve renkli bir çözüm. Kalemlik, ataşlık ve notluk olarak kullanılabilir.",
                 image_url: "https://placehold.co/400x300/c0c0c0/555555?text=3D+Baskı+3"
             },
             {
                 id: 4,
                 name: "Geometrik Abajur",
-                description: "Modern tasarımıyla evinize sıcak bir ışık katın.",
+                description: "Modern tasarımıyla evinize sıcak bir ışık katın. Farklı renk seçenekleriyle dekorasyonunuza uyum sağlar.",
                 image_url: "https://placehold.co/400x300/b0b0b0/555555?text=3D+Baskı+4"
+            },
+            {
+                id: 5,
+                name: "Telefon Standı",
+                description: "Eller serbest video izleme veya görüntülü konuşma için ergonomik ve şık telefon standı.",
+                image_url: "https://placehold.co/400x300/a0a0a0/555555?text=3D+Baskı+5"
+            },
+            {
+                id: 6,
+                name: "Özel Anahtarlık",
+                description: "İsme özel veya logo baskılı, dayanıklı ve hafif anahtarlıklar. Harika bir hediye seçeneği.",
+                image_url: "https://placehold.co/400x300/909090/555555?text=3D+Baskı+6"
             }
         ];
 
@@ -161,7 +173,7 @@
 
                 <section class="mb-8 md:mb-12">
                     <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6 md:mb-8">Öne Çıkan Ürünler</h2>
-                    <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
+                    <div id="product-list-home" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
                     </div>
                 </section>
 
@@ -192,8 +204,9 @@
                 </section>
             `;
 
-            const productListContainer = document.getElementById('product-list');
-            products.forEach(product => {
+            const productListContainer = document.getElementById('product-list-home');
+            // Show only the first 4 products on the home page
+            products.slice(0, 4).forEach(product => {
                 const productCard = document.createElement('div');
                 productCard.className = 'bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:-translate-y-1';
                 
@@ -207,14 +220,45 @@
                 `;
 
                 productCard.querySelector('.contact-product-btn').addEventListener('click', (e) => {
-                    renderContactFormPage();
+                    renderContactFormPage(product.id);
+                });
+
+                productListContainer.appendChild(productCard);
+            });
+        }
+        
+        function renderProductsPage() {
+            mainContent.innerHTML = `
+                <section class="mb-8 md:mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-6 md:mb-10">Tüm Ürünlerimiz</h2>
+                    <div id="product-list-all" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+                    </div>
+                </section>
+            `;
+
+            const productListContainer = document.getElementById('product-list-all');
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:-translate-y-1';
+                
+                productCard.innerHTML = `
+                    <img src="${product.image_url}" alt="${product.name}" class="w-full h-auto rounded-lg mb-4">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-2">${product.name}</h3>
+                    <p class="text-gray-600 mb-4">${product.description}</p>
+                    <button class="contact-product-btn w-full bg-[#e95f0b] text-white font-bold py-3 px-8 rounded-full shadow-md hover:bg-[#017fc0] transition duration-300" data-product-id="${product.id}">
+                        İletişime Geçin
+                    </button>
+                `;
+
+                productCard.querySelector('.contact-product-btn').addEventListener('click', (e) => {
+                    renderContactFormPage(product.id);
                 });
 
                 productListContainer.appendChild(productCard);
             });
         }
 
-        function renderContactFormPage() {
+        function renderContactFormPage(preselectedProductId = null) {
             mainContent.innerHTML = `
                 <div class="bg-white p-6 md:p-8 rounded-xl shadow-md max-w-2xl mx-auto">
                     <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">İletişim Formu</h2>
@@ -238,7 +282,7 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                 ${products.map(product => `
                                     <label class="flex items-center space-x-2 bg-gray-100 p-3 rounded-lg cursor-pointer hover:bg-gray-200 transition duration-150">
-                                        <input type="checkbox" name="İlgilenilen Ürünler" value="${product.name}" class="form-checkbox text-[#e95f0b] rounded-sm focus:ring-[#e95f0b]">
+                                        <input type="checkbox" name="İlgilenilen Ürünler" value="${product.name}" class="form-checkbox text-[#e95f0b] rounded-sm focus:ring-[#e95f0b]" ${preselectedProductId == product.id ? 'checked' : ''}>
                                         <span>${product.name}</span>
                                     </label>
                                 `).join('')}
@@ -330,9 +374,10 @@
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const closeMenuButton = document.getElementById('close-menu-button');
             const sidebarMenu = document.getElementById('sidebar-menu');
-            const homeLink = document.getElementById('home-link');
-            const homeNavLink = document.getElementById('home-nav-link');
-            const homeSidebarLink = document.getElementById('home-sidebar-link');
+            
+            const homeLinks = document.querySelectorAll('#home-link, #home-nav-link, #home-sidebar-link');
+            const productsLinks = document.querySelectorAll('#products-nav-link, #products-sidebar-link');
+            const contactLinks = document.querySelectorAll('#contact-nav-link, #contact-sidebar-link');
 
             mobileMenuButton.addEventListener('click', () => {
                 sidebarMenu.classList.remove('translate-x-full');
@@ -342,11 +387,30 @@
                 sidebarMenu.classList.add('translate-x-full');
             });
             
-            const navLinks = [homeLink, homeNavLink, homeSidebarLink];
-            navLinks.forEach(link => {
+            homeLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     renderHomePage();
+                    if (sidebarMenu.classList.contains('translate-x-0')) {
+                        sidebarMenu.classList.add('translate-x-full');
+                    }
+                });
+            });
+
+            productsLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderProductsPage();
+                    if (sidebarMenu.classList.contains('translate-x-0')) {
+                        sidebarMenu.classList.add('translate-x-full');
+                    }
+                });
+            });
+
+            contactLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderContactFormPage();
                     if (sidebarMenu.classList.contains('translate-x-0')) {
                         sidebarMenu.classList.add('translate-x-full');
                     }

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGurbuz - 3D Baskı Çözümleri</title>
+    <!-- Tailwind CSS CDN'i yüklüyor. Hızlı ve modern bir stil için kullanıyoruz. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Genel fontu Inter olarak ayarlıyoruz ve yumuşak geçişler ekliyoruz */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Hafif gri arka plan */
+            color: #333; /* Koyu gri metin rengi */
+        }
+        /* İkonlar için basit stil */
+        .icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+        /* Liquid glass efekti için özel bir Tailwind sınıfı tanımlıyoruz */
+        .backdrop-blur-lg {
+            backdrop-filter: blur(16px);
+        }
+        /* Gizli öğeler için CSS */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header Bölümü -->
+    <header class="bg-gray-100 text-gray-800 py-4 px-4 sm:px-6 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" id="home-link">
+                <img src="AGurbuzLogoYatay.png" alt="AGurbuz Logo" class="h-16 w-auto">
+            </a>
+            
+            <!-- Hamburger Menü Butonu (Sadece küçük ekranlarda görünür) -->
+            <button id="mobile-menu-button" class="md:hidden p-2 text-gray-800 focus:outline-none">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            
+            <!-- Masaüstü Navigasyon Menüsü (Orta ve büyük ekranlarda görünür) -->
+            <nav class="hidden md:block">
+                <ul class="flex items-center space-x-2 text-lg">
+                    <li>
+                        <a href="#" id="home-nav-link" class="inline-block px-4 py-2 rounded-full font-semibold bg-[#e95f0b] text-white backdrop-blur-lg transition duration-300">Anasayfa</a>
+                    </li>
+                    <li>
+                        <a href="#" class="inline-block px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white hover:backdrop-blur-lg transition duration-300">Ürünler</a>
+                    </li>
+                    <li>
+                        <a href="#" class="inline-block px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white hover:backdrop-blur-lg transition duration-300">Hakkımızda</a>
+                    </li>
+                    <li>
+                        <a href="#" class="inline-block px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white hover:backdrop-blur-lg transition duration-300">İletişim</a>
+                    </li>
+                    <li class="pl-4">
+                        <!-- Sepet İkonu -->
+                        <a href="#" id="cart-link" class="hover:text-[#017fc0] transition duration-300 relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
+                                <path d="M6 22h12a2 2 0 002-2V7a2 2 0 00-2-2h-3v-1a4 4 0 00-8 0v1H4a2 2 0 00-2 2v13a2 2 0 002 2zm10-18a2 2 0 012 2v1h-4V4a2 2 0 012-2zm-6 0a2 2 0 012 2v1h-4V4a2 2 0 012-2zM4 7h16v13a1 1 0 01-1 1H5a1 1 0 01-1-1V7z"></path>
+                            </svg>
+                            <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobil Kenar Çubuğu (Sidebar) -->
+    <div id="sidebar-menu" class="fixed inset-y-0 right-0 z-50 w-64 bg-gray-800 text-white transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex justify-between items-center p-6 border-b border-gray-700">
+            <h2 class="text-xl font-bold">Menü</h2>
+            <!-- Kapatma butonu -->
+            <button id="close-menu-button" class="p-1 focus:outline-none">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <ul class="flex flex-col p-6 space-y-4 text-lg">
+            <li>
+                <a href="#" id="home-sidebar-link" class="inline-block w-full px-4 py-2 rounded-full font-semibold bg-[#e95f0b] text-white transition duration-300">Anasayfa</a>
+            </li>
+            <li>
+                <a href="#" class="inline-block w-full px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white transition duration-300">Ürünler</a>
+            </li>
+            <li>
+                <a href="#" class="inline-block w-full px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white transition duration-300">Hakkımızda</a>
+            </li>
+            <li>
+                <a href="#" class="inline-block w-full px-4 py-2 rounded-full font-semibold hover:bg-[#017fc0]/80 hover:text-white transition duration-300">İletişim</a>
+            </li>
+            <li class="mt-8">
+                <a href="#" id="sidebar-cart-link" class="inline-block w-full px-4 py-2 rounded-full font-semibold bg-gray-600 hover:bg-gray-700 transition duration-300">Sepetim</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Bildirim Mesajı - Sepete ekleme uyarısı için eklendi -->
+    <div id="notification-message" class="fixed top-4 left-1/2 -translate-x-1/2 bg-green-500 text-white p-3 rounded-lg shadow-lg z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+        Ürün başarıyla sepete eklendi!
+    </div>
+
+    <!-- Ana İçerik Bölümü -->
+    <main id="main-content" class="flex-grow container mx-auto p-4 sm:p-8 mt-4 sm:mt-8 max-w-7xl">
+        <!-- Burası dinamik olarak doldurulacak -->
+    </main>
+
+    <!-- Footer Bölümü -->
+    <footer class="bg-gray-800 text-white p-4 md:p-6 mt-8">
+        <div class="container mx-auto text-center text-sm">
+            <p>&copy; 2025 AGurbuz. Tüm Hakları Saklıdır.</p>
+            <div class="flex justify-center space-x-2 md:space-x-4 mt-2">
+                <a href="#" class="hover:text-blue-400 transition duration-300">Gizlilik Politikası</a>
+                <a href="#" class="hover:text-blue-400 transition duration-300">Kullanım Koşulları</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Ürün verilerini doğrudan bir JavaScript dizisi olarak saklıyoruz.
+        const products = [
+            {
+                id: 1,
+                name: "Özel Masaüstü Heykel",
+                description: "Benzersiz tasarımlara sahip, kişiselleştirilebilir dekoratif heykel.",
+                price: 49.99,
+                image_url: "https://placehold.co/400x300/e0e0e0/555555?text=3D+Baskı+1"
+            },
+            {
+                id: 2,
+                name: "Modern Saksılık",
+                description: "Ev ve ofisler için minimalist tasarımlı, şık saksılık.",
+                price: 29.99,
+                image_url: "https://placehold.co/400x300/d0d0d0/555555?text=3D+Baskı+2"
+            },
+            {
+                id: 3,
+                name: "Çok Amaçlı Düzenleyici",
+                description: "Masanızı düzenlemek için fonksiyonel ve renkli bir çözüm.",
+                price: 19.99,
+                image_url: "https://placehold.co/400x300/c0c0c0/555555?text=3D+Baskı+3"
+            },
+            {
+                id: 4,
+                name: "Geometrik Abajur",
+                description: "Modern tasarımıyla evinize sıcak bir ışık katın.",
+                price: 89.99,
+                image_url: "https://placehold.co/400x300/b0b0b0/555555?text=3D+Baskı+4"
+            }
+        ];
+
+        // Sepet verilerini tutacak global değişken
+        let cartItems = [];
+        let notificationTimeout;
+
+        // Ana DOM elementleri
+        const mainContent = document.getElementById('main-content');
+        const cartCountSpan = document.getElementById('cart-count');
+        const notificationMessage = document.getElementById('notification-message');
+
+        // Bildirim mesajını gösteren fonksiyon
+        function showNotification(message) {
+            // Eğer zaten bir bildirim gösteriliyorsa, önceki zamanlayıcıyı temizle
+            clearTimeout(notificationTimeout);
+            
+            notificationMessage.textContent = message;
+            notificationMessage.classList.remove('opacity-0', 'pointer-events-none');
+            
+            // 3 saniye sonra bildirimi gizle
+            notificationTimeout = setTimeout(() => {
+                notificationMessage.classList.add('opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        // Sepete ürün ekleyen fonksiyon
+        function addToCart(product) {
+            const existingItem = cartItems.find(item => item.id === product.id);
+            if (existingItem) {
+                // Eğer ürün sepette varsa miktarını artır
+                existingItem.quantity += 1;
+            } else {
+                // Eğer ürün sepette yoksa yeni ürün olarak ekle
+                cartItems.push({ ...product, quantity: 1 });
+            }
+            updateCartCount();
+            // Ürün sepete eklendiğinde bildirim göster
+            showNotification('Ürün başarıyla sepete eklendi!');
+        }
+
+        // Sepet sayısını güncelleyen fonksiyon
+        function updateCartCount() {
+            const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+            cartCountSpan.textContent = totalItems;
+        }
+
+        // Ürün kartlarını oluşturan fonksiyon
+        function renderHomePage() {
+            mainContent.innerHTML = `
+                <!-- Kahraman (Hero) Bölümü -->
+                <section class="bg-[#017fc0] text-white p-8 md:p-12 rounded-xl shadow-lg mb-8 md:mb-12 text-center">
+                    <h2 class="text-3xl md:text-5xl font-extrabold mb-4">Hayalleriniz Gerçeğe Dönüşsün!</h2>
+                    <p class="text-base md:text-xl mb-6 md:mb-8 max-w-2xl mx-auto">
+                        AGurbuz ile yaratıcılığınızı somutlaştırın. Yüksek kaliteli 3D baskı çözümleriyle fikirlerinizi hayata geçiriyoruz.
+                    </p>
+                    <a href="#" class="inline-block bg-white text-[#017fc0] font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105">
+                        Mağazayı Keşfet!
+                    </a>
+                </section>
+
+                <!-- Öne Çıkan Ürünler Bölümü -->
+                <section class="mb-8 md:mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6 md:mb-8">Öne Çıkan Ürünler</h2>
+                    <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
+                        <!-- Ürünler buraya eklenecek -->
+                    </div>
+                </section>
+
+                <!-- Müşteri Yorumları Bölümü -->
+                <section class="bg-white p-6 md:p-8 rounded-xl shadow-md mb-8 md:mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6 md:mb-8">Müşteri Yorumları</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                        <div class="bg-gray-100 p-6 rounded-lg shadow-inner">
+                            <p class="italic text-gray-700 mb-4">"Ürün kalitesi inanılmaz! Tasarım tam istediğim gibiydi. Kesinlikle tavsiye ederim."</p>
+                            <p class="font-semibold text-right text-gray-800">- Ayşe K.</p>
+                        </div>
+                        <div class="bg-gray-100 p-6 rounded-lg shadow-inner">
+                            <p class="italic text-gray-700 mb-4">"Siparişimi çok kısa sürede aldım. Paketleme de harikaydı, hiç hasar görmemiş."</p>
+                            <p class="font-semibold text-right text-gray-800">- Mehmet T.</p>
+                        </div>
+                        <div class="bg-gray-100 p-6 rounded-lg shadow-inner">
+                            <p class="italic text-gray-700 mb-4">"Özel tasarımım için AGurbuz'la çalıştım. Sonuç harikaydı, süreç boyunca çok ilgiliydiler."</p>
+                            <p class="font-semibold text-right text-gray-800">- Ece G.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Hakkımızda Kısa Bilgi -->
+                <section class="bg-white p-6 md:p-8 rounded-xl shadow-md text-center">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">AGurbuz Hakkında</h2>
+                    <p class="text-gray-700 max-w-3xl mx-auto">
+                        AGurbuz, 3D baskı teknolojisine olan derin tutkusu ve inovasyon arayışıyla kuruldu. Amacımız, hem bireysel yaratıcıların hem de işletmelerin 3D baskının sonsuz olanaklarından faydalanmasını sağlamaktır. Her projede mükemmeliyeti hedefleriz.
+                    </p>
+                    <a href="#" class="inline-block mt-4 md:mt-6 text-[#e95f0b] hover:text-[#017fc0] font-medium">Daha Fazlasını Öğrenin &rarr;</a>
+                </section>
+            `;
+
+            // Ürünleri render et
+            const productListContainer = document.getElementById('product-list');
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:-translate-y-1';
+                
+                productCard.innerHTML = `
+                    <img src="${product.image_url}" alt="${product.name}" class="w-full h-auto rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">${product.name}</h3>
+                    <p class="text-gray-600 mb-3">${product.description}</p>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-2xl font-bold text-[#e95f0b]">${product.price.toFixed(2)} TL</span>
+                    </div>
+                    <button class="w-full bg-[#e95f0b] text-white font-bold py-2 px-4 rounded-full shadow-md hover:bg-[#017fc0] transition duration-300">
+                        Sepete Ekle
+                    </button>
+                `;
+
+                // Sepete ekle butonuna tıklama olayını ekle
+                productCard.querySelector('button').addEventListener('click', () => {
+                    addToCart(product);
+                });
+
+                productListContainer.appendChild(productCard);
+            });
+        }
+
+        // Sepet sayfasını oluşturan fonksiyon
+        function renderCartPage() {
+            mainContent.innerHTML = ''; // Ana içeriği temizle
+
+            let cartContent;
+            if (cartItems.length === 0) {
+                cartContent = `
+                    <div class="text-center p-8 bg-white rounded-xl shadow-md">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Sepetiniz Boş</h2>
+                        <p class="text-gray-600 mb-6">Alışverişe başlamak için ürünleri sepete ekleyebilirsiniz.</p>
+                        <button id="continue-shopping-btn" class="inline-block bg-[#017fc0] text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-[#e95f0b] transition duration-300 transform hover:scale-105">
+                            Alışverişe Devam Et
+                        </button>
+                    </div>
+                `;
+            } else {
+                let total = 0;
+                const cartListHtml = cartItems.map(item => {
+                    total += item.price * item.quantity;
+                    return `
+                        <div class="flex items-center justify-between bg-gray-100 p-4 rounded-lg mb-4 shadow-sm">
+                            <div class="flex items-center">
+                                <img src="${item.image_url}" alt="${item.name}" class="w-16 h-16 rounded-lg mr-4">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">${item.name}</h4>
+                                    <p class="text-gray-600">${item.price.toFixed(2)} TL x ${item.quantity}</p>
+                                </div>
+                            </div>
+                            <span class="text-lg font-bold text-[#e95f0b]">${(item.price * item.quantity).toFixed(2)} TL</span>
+                        </div>
+                    `;
+                }).join('');
+
+                cartContent = `
+                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-md">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Sepetim</h2>
+                        <div>
+                            ${cartListHtml}
+                        </div>
+                        <div class="border-t border-gray-200 mt-6 pt-6 flex justify-between items-center">
+                            <span class="text-2xl font-bold text-gray-800">Toplam:</span>
+                            <span class="text-2xl font-bold text-[#e95f0b]">${total.toFixed(2)} TL</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-8">
+                            <button id="clear-cart-btn" class="w-full bg-red-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-600 transition duration-300 transform hover:scale-105">
+                                Sepeti Temizle
+                            </button>
+                            <button id="continue-shopping-btn" class="w-full bg-[#e95f0b] text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-[#017fc0] transition duration-300 transform hover:scale-105">
+                                Alışverişe Devam Et
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+            mainContent.innerHTML = cartContent;
+
+            // Butonlara event listener'ları ekle
+            document.getElementById('continue-shopping-btn')?.addEventListener('click', renderHomePage);
+            document.getElementById('clear-cart-btn')?.addEventListener('click', () => {
+                cartItems = [];
+                updateCartCount();
+                renderCartPage();
+            });
+        }
+
+        // Sayfa yüklendiğinde ana sayfa içeriğini ve menü event listener'larını çalıştır
+        window.onload = function() {
+            renderHomePage();
+            updateCartCount();
+
+            // Menü butonlarının işlevselliği için gerekli event listener'ları ekliyoruz
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const closeMenuButton = document.getElementById('close-menu-button');
+            const sidebarMenu = document.getElementById('sidebar-menu');
+            const cartLink = document.getElementById('cart-link');
+            const sidebarCartLink = document.getElementById('sidebar-cart-link');
+            const homeLink = document.getElementById('home-link');
+            const homeNavLink = document.getElementById('home-nav-link');
+            const homeSidebarLink = document.getElementById('home-sidebar-link');
+
+            mobileMenuButton.addEventListener('click', () => {
+                sidebarMenu.classList.remove('translate-x-full');
+            });
+
+            closeMenuButton.addEventListener('click', () => {
+                sidebarMenu.classList.add('translate-x-full');
+            });
+            
+            // Anasayfa linklerine event listener ekle
+            homeLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                renderHomePage();
+            });
+
+            homeNavLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                renderHomePage();
+            });
+
+            homeSidebarLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                renderHomePage();
+                sidebarMenu.classList.add('translate-x-full'); // Anasayfaya gidince sidebar'ı kapat
+            });
+
+            // Sepet sayfasına gitme linklerine event listener ekle
+            cartLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                renderCartPage();
+            });
+
+            sidebarCartLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                renderCartPage();
+                sidebarMenu.classList.add('translate-x-full'); // Sepet açılınca sidebar'ı kapat
+            });
+        };
+    </script>
+
+</body>
+</html>

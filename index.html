@@ -103,39 +103,45 @@
         const products = [
             {
                 id: 1,
-                name: "Özel Masaüstü Heykel",
-                description: "Benzersiz tasarımlara sahip, kişiselleştirilebilir dekoratif heykel. Ofisinizde veya evinizde modern bir dokunuş yaratın.",
-                image_url: "https://placehold.co/400x300/e0e0e0/555555?text=3D+Baskı+1"
+                name: "Iron Man Kaskı",
+                description: "",
+                image_url: "Products/Images/IronManKaski.png"
             },
             {
                 id: 2,
-                name: "Modern Saksılık",
-                description: "Ev ve ofisler için minimalist tasarımlı, şık saksılık. Bitkilerinizi sergilemenin en modern yolu.",
-                image_url: "https://placehold.co/400x300/d0d0d0/555555?text=3D+Baskı+2"
+                name: "Osimhen Maskesi",
+                description: "",
+                image_url: "Products/Images/OsimhenMaskesi.png"
             },
             {
                 id: 3,
-                name: "Çok Amaçlı Düzenleyici",
-                description: "Masanızı düzenlemek için fonksiyonel ve renkli bir çözüm. Kalemlik, ataşlık ve notluk olarak kullanılabilir.",
-                image_url: "https://placehold.co/400x300/c0c0c0/555555?text=3D+Baskı+3"
+                name: "Minecraft Creeper",
+                description: "",
+                image_url: "Products/Images/MinecraftCreeper.png"
             },
             {
                 id: 4,
-                name: "Geometrik Abajur",
-                description: "Modern tasarımıyla evinize sıcak bir ışık katın. Farklı renk seçenekleriyle dekorasyonunuza uyum sağlar.",
-                image_url: "https://placehold.co/400x300/b0b0b0/555555?text=3D+Baskı+4"
+                name: "Minecraft İskelet",
+                description: "",
+                image_url: "Products/Images/MinecraftSkeleton.png"
             },
             {
                 id: 5,
-                name: "Telefon Standı",
-                description: "Eller serbest video izleme veya görüntülü konuşma için ergonomik ve şık telefon standı.",
-                image_url: "https://placehold.co/400x300/a0a0a0/555555?text=3D+Baskı+5"
+                name: "Spinner",
+                description: "",
+                image_url: "Products/Images/Spinner.png"
             },
             {
                 id: 6,
-                name: "Özel Anahtarlık",
-                description: "İsme özel veya logo baskılı, dayanıklı ve hafif anahtarlıklar. Harika bir hediye seçeneği.",
-                image_url: "https://placehold.co/400x300/909090/555555?text=3D+Baskı+6"
+                name: "Hareketli Köpekbalığı Anahtarlık",
+                description: "",
+                image_url: "Products/Images/ArticulatedShark.png"
+            },
+            {
+                id: 7,
+                name: "Deney Tüpü Tutucu",
+                description: "",
+                image_url: "Products/Images/DeneyTupuTutucu.png"
             }
         ];
 
@@ -211,7 +217,7 @@
                 productCard.className = 'bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:-translate-y-1';
                 
                 productCard.innerHTML = `
-                    <img src="${product.image_url}" alt="${product.name}" class="w-full h-auto rounded-lg mb-4">
+                    <img src="${product.image_url}" alt="${product.name}" class="w-full h-auto rounded-lg mb-4 shadow-lg">
                     <h3 class="text-xl font-semibold text-gray-800 mb-2">${product.name}</h3>
                     <p class="text-gray-600 mb-3">${product.description}</p>
                     <button class="contact-product-btn w-full bg-[#e95f0b] text-white font-bold py-2 px-4 rounded-full shadow-md hover:bg-[#017fc0] transition duration-300" data-product-id="${product.id}">
@@ -242,7 +248,7 @@
                 productCard.className = 'bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:-translate-y-1';
                 
                 productCard.innerHTML = `
-                    <img src="${product.image_url}" alt="${product.name}" class="w-full h-auto rounded-lg mb-4">
+                    <img src="${product.image_url}" alt="${product.name}" class="w-full h-auto rounded-lg mb-4 shadow-lg">
                     <h3 class="text-2xl font-semibold text-gray-800 mb-2">${product.name}</h3>
                     <p class="text-gray-600 mb-4">${product.description}</p>
                     <button class="contact-product-btn w-full bg-[#e95f0b] text-white font-bold py-3 px-8 rounded-full shadow-md hover:bg-[#017fc0] transition duration-300" data-product-id="${product.id}">
